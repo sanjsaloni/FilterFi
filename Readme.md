@@ -5,7 +5,7 @@ Hence, I came up with this idea of creating a web extension which helps us to fi
 
 Why a chrome extension? Cause this saves time and will help others like me also I can add it on my portfolio as it's good project and solves real-world problems.
 
-##✨ Features
+## ✨ Features
 
 - 🔍 Automatically scans job listings on LinkedIn Jobs.
 - ⚙️ Filters out jobs requiring more than a selected number of years of experience.
@@ -13,7 +13,7 @@ Why a chrome extension? Cause this saves time and will help others like me also 
 - 👩‍💻 Saves time for freshers and early-career professionals.
 
 
-Tech stack used:
+## Tech stack used:
 React - Frontend for the popup interface
 Vite - Fast bundler
 Chrome Extension Manifest V3 - Extension API
