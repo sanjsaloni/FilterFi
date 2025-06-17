@@ -10,4 +10,15 @@ This project is provided for personal and non-commercial use only. You may not:
 - Modify or use the code for your own project.
 - Sell, license, or otherwise commercialize this extension or its source.
 
-For licensing inquiries, contact: [your-email@example.com]
+For licensing inquiries, contact: [sanjanasahoo1712@gmail.com]
+
+# Contributions
+
+You are welcome to submit issues, bug fixes, or feature suggestions via GitHub pull requests, provided they do not violate the proprietary nature of the project.
+
+By submitting a contribution, you agree that:
+- You are the original author of the submitted content.
+- You grant the project owner (Sanjana Saloni) an irrevocable right to use, modify, and distribute your contribution as part of this project.
+- Your contributions do not give you ownership over any part of the project.
+
+All contributions remain under the project's proprietary license unless explicitly stated otherwise.
