@@ -26,3 +26,16 @@ You may **not** copy, modify, distribute, or reuse the code in any form without 
 
 © 2025 Sanjana Saloni. All rights reserved.
 
+## 🤝 Contributing
+
+Have ideas to improve this project? You're welcome to contribute!
+
+To contribute:
+1. Fork the repository
+2. Create a new branch
+3. Submit a pull request with a clear description
+
+By contributing, you agree to the terms outlined in the LICENSE file.
+
+Note: This project remains proprietary — contributions do not imply open-source status.
+
