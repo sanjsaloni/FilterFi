@@ -1,0 +1,13 @@
+Copyright (c) 2025 Sanjana Saloni
+
+All rights reserved.
+
+This software and source code are proprietary and confidential. Unauthorized copying, distribution, modification, or commercial use of any part of this project is strictly prohibited without prior written permission from the author.
+
+This project is provided for personal and non-commercial use only. You may not:
+
+- Copy or redistribute the code or compiled extension.
+- Modify or use the code for your own project.
+- Sell, license, or otherwise commercialize this extension or its source.
+
+For licensing inquiries, contact: [your-email@example.com]

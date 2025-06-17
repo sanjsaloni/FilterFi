@@ -14,7 +14,15 @@ Why a chrome extension? Cause this saves time and will help others like me also 
 
 
 ## Tech stack used:
-React - Frontend for the popup interface
-Vite - Fast bundler
-Chrome Extension Manifest V3 - Extension API
-Vanilla JS - DOM parsing and filtering logic in content.js
+- React - Frontend for the popup interface
+- Vite - Fast bundler
+- Chrome Extension Manifest V3 - Extension API
+- Vanilla JS - DOM parsing and filtering logic in content.js
+
+## 🛡 License
+
+This project is licensed under a **Proprietary License**.  
+You may **not** copy, modify, distribute, or reuse the code in any form without explicit permission from the author.
+
+© 2025 Sanjana Saloni. All rights reserved.
+
