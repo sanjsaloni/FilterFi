@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Experience Filter</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="icon">🎯</div>
+            <h1>Job Experience Filter</h1>
+        </div>
+        
+        <div class="toggle-section">
+            <label class="toggle-label">
+                <span>Enable Filtering</span>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="enableFilter" checked>
+                    <span class="slider"></span>
+                </div>
+            </label>
+        </div>
+
+        <div class="filter-section">
+            <div class="experience-label">
+                <span>Experience Level</span>
+                <span class="experience-value" id="experienceValue">0-2 years</span>
+            </div>
+            
+            <div class="slider-container">
+                <input type="range" id="experienceSlider" min="0" max="10" value="2" step="1" class="experience-slider">
+                <div class="slider-labels">
+                    <span>0</span>
+                    <span>2</span>
+                    <span>4</span>
+                    <span>6</span>
+                    <span>8</span>
+                    <span>10+</span>
+                </div>
+            </div>
+
+            <div class="experience-levels">
+                <div class="level-item" data-level="0">
+                    <span class="level-dot"></span>
+                    <span>Internship</span>
+                </div>
+                <div class="level-item" data-level="2">
+                    <span class="level-dot"></span>
+                    <span>Entry Level</span>
+                </div>
+                <div class="level-item" data-level="4">
+                    <span class="level-dot"></span>
+                    <span>Associate</span>
+                </div>
+                <div class="level-item" data-level="6">
+                    <span class="level-dot"></span>
+                    <span>Mid-Senior</span>
+                </div>
+                <div class="level-item" data-level="8">
+                    <span class="level-dot"></span>
+                    <span>Director</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-item">
+                <span class="stat-number" id="totalJobs">0</span>
+                <span class="stat-label">Total Jobs</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="matchingJobs">0</span>
+                <span class="stat-label">Matching</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="filteredJobs">0</span>
+                <span class="stat-label">Filtered</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button id="resetButton" class="reset-btn">Reset Filters</button>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
+

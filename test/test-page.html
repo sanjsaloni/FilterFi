@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Jobs Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f3f2ef;
+        }
+        
+        .jobs-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .job-card-container {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .job-card-container:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0073b1;
+            margin-bottom: 8px;
+            text-decoration: none;
+        }
+        
+        .company-name {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .job-location {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .job-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+        
+        .job-meta {
+            font-size: 12px;
+            color: #666;
+            margin-top: 12px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 250px;
+        }
+        
+        .test-controls h3 {
+            margin-top: 0;
+            color: #0073b1;
+        }
+        
+        .experience-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .filter-btn {
+            background: #0073b1;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .filter-btn:hover {
+            background: #005885;
+        }
+        
+        .stats {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9ff;
+            border-radius: 4px;
+        }
+        
+        .stats div {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>LinkedIn Jobs Test Page</h1>
+        <p>This page simulates LinkedIn job listings to test the Job Experience Filter extension</p>
+    </div>
+    
+    <div class="test-controls">
+        <h3>🎯 Job Filter Test</h3>
+        <label>Experience Level: <span id="experienceValue">2</span> years</label><br>
+        <input type="range" id="experienceSlider" class="experience-slider" min="0" max="10" value="2">
+        <br>
+        <button class="filter-btn" onclick="applyTestFilter()">Apply Filter</button>
+        <button class="filter-btn" onclick="resetTestFilter()">Reset</button>
+        
+        <div class="stats">
+            <div><strong>Statistics:</strong></div>
+            <div>Total Jobs: <span id="totalJobs">7</span></div>
+            <div>Matching: <span id="matchingJobs">7</span></div>
+            <div>Filtered: <span id="filteredJobs">0</span></div>
+        </div>
+    </div>
+
+    <div class="jobs-container">
+        <!-- Internship Job -->
+        <div class="job-card-container" data-job-id="1">
+            <a href="#" class="job-title">Software Engineering Intern</a>
+            <div class="company-name">Google</div>
+            <div class="job-location">Mountain View, CA</div>
+            <div class="job-description">
+                We are looking for a software engineering intern to join our team. This is a great opportunity for students or recent graduates to gain hands-on experience. No prior professional experience required. Perfect for those just starting their career in tech.
+            </div>
+            <div class="job-meta">Posted 2 days ago • Internship</div>
+        </div>
+
+        <!-- Entry Level Job -->
+        <div class="job-card-container" data-job-id="2">
+            <a href="#" class="job-title">Junior Software Developer</a>
+            <div class="company-name">Microsoft</div>
+            <div class="job-location">Seattle, WA</div>
+            <div class="job-description">
+                Entry-level position for a junior software developer. We're seeking candidates with 0-2 years of experience in software development. Fresh graduates welcome. You'll work on exciting projects while learning from experienced developers.
+            </div>
+            <div class="job-meta">Posted 1 week ago • Entry level</div>
+        </div>
+
+        <!-- Associate Level Job -->
+        <div class="job-card-container" data-job-id="3">
+            <a href="#" class="job-title">Software Engineer</a>
+            <div class="company-name">Apple</div>
+            <div class="job-location">Cupertino, CA</div>
+            <div class="job-description">
+                We are looking for a software engineer with 2-4 years of experience to join our team. The ideal candidate should have experience with modern programming languages and frameworks. Associate level position with growth opportunities.
+            </div>
+            <div class="job-meta">Posted 3 days ago • Associate</div>
+        </div>
+
+        <!-- Mid-Senior Level Job -->
+        <div class="job-card-container" data-job-id="4">
+            <a href="#" class="job-title">Senior Software Engineer</a>
+            <div class="company-name">Amazon</div>
+            <div class="job-location">Austin, TX</div>
+            <div class="job-description">
+                Senior software engineer position requiring 5-7 years of experience in software development. You'll lead technical initiatives and mentor junior developers. Mid-senior level role with competitive compensation and benefits.
+            </div>
+            <div class="job-meta">Posted 5 days ago • Mid-Senior level</div>
+        </div>
+
+        <!-- Director Level Job -->
+        <div class="job-card-container" data-job-id="5">
+            <a href="#" class="job-title">Engineering Director</a>
+            <div class="company-name">Meta</div>
+            <div class="job-location">Menlo Park, CA</div>
+            <div class="job-description">
+                Director of Engineering position requiring 8+ years of experience in software development and team leadership. You'll manage multiple engineering teams and drive strategic technical decisions. Executive level role.
+            </div>
+            <div class="job-meta">Posted 1 week ago • Director</div>
+        </div>
+
+        <!-- Another Entry Level -->
+        <div class="job-card-container" data-job-id="6">
+            <a href="#" class="job-title">Frontend Developer</a>
+            <div class="company-name">Netflix</div>
+            <div class="job-location">Los Gatos, CA</div>
+            <div class="job-description">
+                Frontend developer position for candidates with 1-2 years of experience. You'll work on user-facing features and collaborate with design teams. Entry level to associate level position.
+            </div>
+            <div class="job-meta">Posted 4 days ago • Entry level</div>
+        </div>
+
+        <!-- Another Senior Level -->
+        <div class="job-card-container" data-job-id="7">
+            <a href="#" class="job-title">Principal Software Engineer</a>
+            <div class="company-name">Tesla</div>
+            <div class="job-location">Palo Alto, CA</div>
+            <div class="job-description">
+                Principal engineer role requiring 6-8 years of experience in software architecture and system design. You'll lead complex technical projects and influence engineering standards across the organization.
+            </div>
+            <div class="job-meta">Posted 6 days ago • Mid-Senior level</div>
+        </div>
+    </div>
+
+    <script>
+        // Include the content script logic for testing
+        const experiencePatterns = {
+            internship: /intern|internship|student/i,
+            entryLevel: /entry.?level|0.?2\s*years?|1.?2\s*years?|junior|graduate|new.?grad/i,
+            associate: /associate|2.?4\s*years?|3.?5\s*years?/i,
+            midSenior: /mid.?senior|senior|4.?8\s*years?|5.?7\s*years?|6.?8\s*years?/i,
+            director: /director|lead|principal|8\+?\s*years?|10\+?\s*years?|manager/i
+        };
+
+        function extractExperienceLevel(jobCard) {
+            const textContent = jobCard.textContent || '';
+            const fullText = textContent.toLowerCase();
+
+            if (experiencePatterns.internship.test(fullText)) {
+                return 0;
+            }
+            if (experiencePatterns.entryLevel.test(fullText)) {
+                return 2;
+            }
+            if (experiencePatterns.associate.test(fullText)) {
+                return 4;
+            }
+            if (experiencePatterns.midSenior.test(fullText)) {
+                return 6;
+            }
+            if (experiencePatterns.director.test(fullText)) {
+                return 8;
+            }
+
+            const yearMatches = fullText.match(/(\d+)[\s\-\+]*(?:to|-)?s*(d+)?\s*(?:\+)?\s*years?\s*(?:of\s*)?(?:experience|exp)/g);
+            if (yearMatches) {
+                const numbers = yearMatches[0].match(/\d+/g);
+                if (numbers) {
+                    const minYears = parseInt(numbers[0]);
+                    return Math.min(minYears, 10);
+                }
+            }
+
+            return 2;
+        }
+
+        function shouldShowJob(jobExperienceLevel, userExperienceLevel) {
+            const tolerance = 2;
+            return jobExperienceLevel <= userExperienceLevel + tolerance;
+        }
+
+        function applyTestFilter() {
+            const userLevel = parseInt(document.getElementById('experienceSlider').value);
+            const jobCards = document.querySelectorAll('.job-card-container');
+            let matching = 0;
+            let filtered = 0;
+            
+            jobCards.forEach(function(jobCard) {
+                const jobLevel = extractExperienceLevel(jobCard);
+                const shouldShow = shouldShowJob(jobLevel, userLevel);
+                
+                if (shouldShow) {
+                    jobCard.style.opacity = '1';
+                    jobCard.style.filter = 'none';
+                    jobCard.style.transform = 'scale(1)';
+                    jobCard.style.borderLeft = 'none';
+                    matching++;
+                } else {
+                    jobCard.style.opacity = '0.3';
+                    jobCard.style.filter = 'grayscale(50%)';
+                    jobCard.style.transform = 'scale(0.98)';
+                    jobCard.style.borderLeft = '3px solid #ff6b6b';
+                    filtered++;
+                }
+            });
+            
+            document.getElementById('matchingJobs').textContent = matching;
+            document.getElementById('filteredJobs').textContent = filtered;
+        }
+
+        function resetTestFilter() {
+            const jobCards = document.querySelectorAll('.job-card-container');
+            jobCards.forEach(function(jobCard) {
+                jobCard.style.opacity = '1';
+                jobCard.style.filter = 'none';
+                jobCard.style.transform = 'scale(1)';
+                jobCard.style.borderLeft = 'none';
+            });
+            
+            document.getElementById('matchingJobs').textContent = '7';
+            document.getElementById('filteredJobs').textContent = '0';
+        }
+
+        document.getElementById('experienceSlider').addEventListener('input', function() {
+            document.getElementById('experienceValue').textContent = this.value;
+            applyTestFilter();
+        });
+
+        // Initialize
+        applyTestFilter();
+    </script>
+</body>
+</html>
+

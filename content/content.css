@@ -1,0 +1,112 @@
+/* Content CSS for Job Experience Filter extension */
+
+/* Dimming effect for filtered jobs */
+.job-experience-filtered {
+    opacity: 0.3 !important;
+    filter: grayscale(50%) !important;
+    transform: scale(0.98) !important;
+    transition: all 0.3s ease !important;
+    pointer-events: auto !important; /* Keep clickable for accessibility */
+}
+
+/* Hover effect to temporarily show filtered jobs */
+.job-experience-filtered:hover {
+    opacity: 0.7 !important;
+    filter: grayscale(20%) !important;
+    transform: scale(1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Add a subtle border to filtered jobs */
+.job-experience-filtered {
+    border-left: 3px solid #ff6b6b !important;
+    border-radius: 4px !important;
+}
+
+/* Ensure smooth transitions for all job cards */
+.job-card-container,
+[data-job-id],
+.job-card,
+.jobs-search-results__list-item,
+.job-search-card {
+    transition: all 0.3s ease !important;
+}
+
+/* Add a visual indicator for filtered jobs */
+.job-experience-filtered::before {
+    content: "🚫";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 12px;
+    opacity: 0.6;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide the indicator on hover */
+.job-experience-filtered:hover::before {
+    opacity: 0.3;
+}
+
+/* Ensure the job cards maintain their layout */
+.job-experience-filtered {
+    margin-bottom: 8px !important;
+}
+
+/* Add a subtle animation when filtering is applied */
+@keyframes filterApplied {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(0.98); }
+}
+
+.job-experience-filtered {
+    animation: filterApplied 0.5s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .job-experience-filtered::before {
+        top: 4px;
+        right: 4px;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+    }
+}
+
+/* Accessibility improvements */
+.job-experience-filtered {
+    position: relative;
+}
+
+/* Add focus styles for keyboard navigation */
+.job-experience-filtered:focus,
+.job-experience-filtered:focus-within {
+    opacity: 0.8 !important;
+    outline: 2px solid #667eea !important;
+    outline-offset: 2px !important;
+}
+
+/* Ensure text remains readable */
+.job-experience-filtered * {
+    color: inherit !important;
+}
+
+/* Special handling for LinkedIn's specific job card layouts */
+.job-card-container.job-experience-filtered {
+    background-color: rgba(255, 107, 107, 0.05) !important;
+}
+
+.job-card-container.job-experience-filtered:hover {
+    background-color: rgba(255, 107, 107, 0.02) !important;
+}
+
