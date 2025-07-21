@@ -88,9 +88,23 @@ To modify the extension:
 2. Reload the extension in `chrome://extensions/`
 3. Test on LinkedIn job pages
 
-## License
+## 🛡 License
 
-This project is open source and available under the MIT License.
+This project is licensed under a **Proprietary License**.  
+You may **not** copy, modify, distribute, or reuse the code in any form without explicit permission from the author.
+
+© 2025 Sanjana Saloni. All rights reserved.
+
+## 🤝 Contributing
+
+Have ideas to improve this project? You're welcome to contribute!
+
+To contribute:
+1. Fork the repository
+2. Create a new branch
+3. Submit a pull request with a clear description
+
+By contributing, you agree to the terms outlined in the LICENSE file.
 
 ## Support
 
