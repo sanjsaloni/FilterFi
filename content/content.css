@@ -1,5 +1,249 @@
 /* Content CSS for Job Experience Filter extension */
+/* Floating popup container */
+.je-floating-popup {
+    position: fixed;
+    top: 80px;
+    right: 40px;
+    width: 350px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(60, 60, 90, 0.18), 0 1.5px 6px rgba(0,0,0,0.08);
+    z-index: 99999;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    border: 1px solid #e6e8ec;
+    animation: je-fade-in 0.25s;
+    overflow: hidden;
+    resize: both;
+    min-width: 250px;
+    min-height: 200px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow: auto;
+    /* Optionally, add a visible resize handle */
+    box-sizing: border-box;
+}
 
+/* Optional: Style the resize handle for better visibility */
+.je-floating-popup::after {
+    content: "";
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 18px;
+    height: 18px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'18\' height=\'18\'><path d=\'M2,16 L16,2 M6,16 L16,6 M10,16 L16,10\' stroke=\'%23bbb\' stroke-width=\'2\' fill=\'none\'/></svg>') no-repeat center center;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Header */
+.je-floating-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px 12px 22px;
+    background: #f7f8fa;
+    border-bottom: 1px solid #ececec;
+    font-weight: 600;
+    font-size: 18px;
+    color: #22223b;
+    border-radius: 16px 16px 0 0;
+}
+
+/* Close button */
+.je-floating-popup-close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s;
+    padding: 0 4px;
+}
+.je-floating-popup-close:hover {
+    color: #e74c3c;
+}
+
+/* Body */
+.je-floating-popup-body {
+    padding: 18px 22px 22px 22px;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Slider */
+#je-experience-slider {
+    width: 100%;
+    margin: 10px 0 0 0;
+    accent-color: #3b82f6;
+}
+
+/* Label for slider */
+#je-experience-label {
+    margin-left: 10px;
+    font-weight: 500;
+    color: #3b82f6;
+}
+
+/* Toggle */
+/* .je-filter-toggle-row {
+    display: flex;
+    align-items: center;  vertically align label and checkbox
+    gap: 800px;            /* space between label and checkbox
+  }
+  
+#je-filter-toggle {
+    accent-color: #0073b1;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+.je-filter-toggle-row label {
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } */
+  .je-filter-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Hide default checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* Custom toggle container */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+  }
+  
+  /* Slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.3s;
+  }
+  
+  /* Slider circle */
+  .slider::before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  
+  /* When checked */
+  .switch input:checked + .slider {
+    background-color: #0073b1;
+  }
+  
+  .switch input:checked + .slider::before {
+    transform: translateX(18px);
+  }
+  
+  .stats-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: #f8f9ff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Buttons */
+#je-extract-descriptions, #je-clear-results {
+    background: linear-gradient(90deg, #3b82f6 0%, #667eea 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-right: 8px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(60, 60, 90, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+#je-extract-descriptions:hover, #je-clear-results:hover {
+    background: linear-gradient(90deg, #2563eb 0%, #5a67d8 100%);
+    box-shadow: 0 2px 8px rgba(60, 60, 90, 0.12);
+}
+
+/* Results table */
+#je-extraction-results {
+    margin-top: 18px;
+    max-height: 200px;
+    overflow: auto;
+    border: 1px solid #e6e8ec;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: 13px;
+}
+#je-extraction-results table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#je-extraction-results th, #je-extraction-results td {
+    padding: 6px 8px;
+    border: 1px solid #e6e8ec;
+    text-align: left;
+}
+#je-extraction-results th {
+    background: #e0e7ff;
+    color: #22223b;
+    font-weight: 600;
+}
+#je-extraction-results tr:nth-child(even) {
+    background: #f1f5f9;
+}
+
+/* Fade-in animation */
+@keyframes je-fade-in {
+    from { opacity: 0; transform: translateY(-16px);}
+    to { opacity: 1; transform: translateY(0);}
+}
 /* Dimming effect for filtered jobs */
 .job-experience-filtered {
     opacity: 0.3 !important;
@@ -108,5 +352,109 @@
 
 .job-card-container.job-experience-filtered:hover {
     background-color: rgba(255, 107, 107, 0.02) !important;
+}
+
+/* Floating popup styles */
+.je-floating-popup {
+    position: fixed;
+    top: 60px;
+    right: 40px;
+    width: 320px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    z-index: 99999;
+    font-family: inherit;
+    animation: je-fade-in 0.2s;
+}
+.je-floating-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #ececec;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px 10px 0 0;
+}
+.je-floating-popup-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s;
+}
+.je-floating-popup-close:hover {
+    color: #e74c3c;
+}
+.je-floating-popup-body {
+    padding: 16px;
+    font-size: 15px;
+    color: #333;
+}
+@keyframes je-fade-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stylish slider for floating popup */
+#je-experience-slider {
+  width: 100%;
+  margin: 10px 0;
+  accent-color: #0073b1;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0073b1 0%, #00c6fb 100%);
+}
+#je-experience-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #0073b1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#je-experience-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #0073b1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#je-experience-slider:focus {
+  outline: none;
+}
+
+.je-filter-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.je-exp-badge {
+    display: inline-block;
+    background: #e1ecf4;
+    color: #0073b1;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-left: 8px;
+    margin-top: 4px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
 }
 
