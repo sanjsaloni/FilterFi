@@ -21,7 +21,7 @@
         );
     }
     if (!isTargetPage()) {
-        alert("Not a LinkedIn jobs page. Exiting content script.");
+        console.log("Not a LinkedIn jobs page. Exiting content script.");
         setupMutationObserver();
     }
 
@@ -604,9 +604,10 @@
                 jobCards[i]._jeData = jobData;
                 // updateExtractionResultsDisplay();
                 // console.log(`Extracted:`, jobData);
+                updateExtractionResultsDisplay();
             }
             // applyfilter();
-            updateExtractionResultsDisplay();
+            
             // updateStats();
             // if (filterEnabled){
             //     applyFiltering();
