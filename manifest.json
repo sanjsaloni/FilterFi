@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Job Experience Filter",
+  "name": "FilterFi",
   "version": "1.0",
   "description": "Filter job listings based on experience level with a visual dimming effect",
   "permissions": [
@@ -14,7 +14,7 @@
     "https://www.linkedin.com/jobs*"
   ],
   "action": {
-    "default_title":"FilterFi",
+    "default_title": "FilterFi",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
