@@ -1,4 +1,4 @@
-#🧩 Job Experience Filter - Chrome Extension
+## 🧩 Job Experience Filter - Chrome Extension
 
 A Chrome extension that filters job listings on LinkedIn based on user-set experience level using a visual dimming effect.
 
