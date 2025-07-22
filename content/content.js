@@ -145,7 +145,7 @@
                 }
             </style>
             <div class="je-floating-popup-header">
-                <span>Job Experience Filter</span>
+                <span>FilterFi</span>
                 <button class="je-floating-popup-close" title="Close">&times;</button>
             </div>
             <div class="je-floating-popup-body">
