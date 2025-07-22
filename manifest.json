@@ -14,7 +14,7 @@
     "https://www.linkedin.com/jobs*"
   ],
   "action": {
-    "default_title": "FilterFi",
+    "default_title":"FilterFi",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
