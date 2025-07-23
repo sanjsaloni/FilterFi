@@ -22,7 +22,8 @@
     }
     if (!isTargetPage()) {
         console.log("Not a LinkedIn jobs page. Exiting content script.");
-        setupMutationObserver();
+        return;
+        // setupMutationObserver();
     }
 
     // Experience level patterns for matching
@@ -94,6 +95,7 @@
             floatingPopup.remove();
             floatingPopup = null;
             removeAllFiltering();
+            removeAllExperienceBadges();
             return;
         }
         // startFiltering();
@@ -198,6 +200,7 @@
             floatingPopup.remove();
             floatingPopup = null;
             removeAllFiltering();
+            removeAllExperienceBadges();
         };
         document.body.appendChild(floatingPopup);
     
@@ -243,7 +246,7 @@
                     await extractAllJobDescriptions(); // Run the slow scraper
                     console.log('Extraction complete. Applying filters.');
                     applyFiltering(); // Now apply the fast filter
-                    updateExtractionResultsDisplay(); // Update the results table
+                    // updateExtractionResultsDisplay(); // Update the results table
                 });
         floatingPopup.querySelector('#je-clear-results').addEventListener('click', function () {
             extractionResults = [];
@@ -325,8 +328,9 @@
         const jobCards = findJobCards();
         // extractAllJobDescriptions();
         console.log(extractionResults);
-        if (extractionResults.length!==0) {
         stats = { total: jobCards.length, matching: 0, filtered: 0 };
+        if (extractionResults.length!==0) {
+        
         // chrome.storage.sync.set([])
         chrome.storage.sync.get(['experienceLevel'], result => {
             currentExperienceLevel = result.experienceLevel;
@@ -349,6 +353,7 @@
             
         });
     }
+    
         updateStats();
         console.log('Job Experience Filter: Applied filtering to', stats.total, 'jobs');
     }
@@ -449,6 +454,7 @@
 
     function updateStats() {
         try {
+            if (floatingPopup){
             console.log("Updating")
             console.log(stats,"Stats")
             const totalJobsElement = floatingPopup.querySelector('#totalJobs');
@@ -458,6 +464,7 @@
             if (totalJobsElement) totalJobsElement.textContent = stats.total;
             if (matchingJobsElement) matchingJobsElement.textContent = stats.matching;
             if (filteredJobsElement) filteredJobsElement.textContent = stats.filtered;
+            }
         //     chrome.runtime.sendMessage({
         //         action: 'updateStats',
         //         stats: stats
@@ -502,7 +509,7 @@
         function extractExperienceLevel(overrideDescription) {
             const fullText = overrideDescription || '';
             
-            const yearExpRegex = /(?:(\d+)[\s-]*(?:to|-)[\s]*(\d+)?\s*(?:years?|yrs?)|(\d+)\+?\s*(?:years?|yrs?))\s*(?:of\s*)?(?:experience|exp|work|professional|relevant|related|minimum|required)/gi;
+            const yearExpRegex = /(?:(\d+)[\s-]*(?:to|-)[\s]*(\d+)?\s*(?:years?|yrs?|year?)|(\d+)\+?\s*(?:years?|yrs?|year?))\s*(?:of\s*)?(?:experience|exp|work|professional|relevant|related|minimum|required)/gi;
             
             const matches = [...fullText.matchAll(yearExpRegex)];
             
@@ -526,7 +533,7 @@
                 experienceLevel = parseInt(minYears1);
             }
             
-            return experienceLevel === -1 ? -1 : Math.min(experienceLevel, 10);
+            return experienceLevel === -1 ? -1 : Math.min(experienceLevel, 30);
         }
         
     // function extractExperienceLevel(jobCard, overrideDescription) {
@@ -556,14 +563,38 @@
     //     return -1;
     // } // extractExperienceLevel() ends here.
 
+    // Helper to extract job title from a job card element
+    function getTitleFromCard(jobCard) {
+        // Try common LinkedIn job card title selectors
+        const selectors = [
+            '.job-card-list__title',
+            '.job-card-container__link',
+            '.job-card-container__job-title',
+            '.job-card-list__entity-lockup-title',
+            '.job-card-title',
+            'a[aria-label]', // Sometimes the title is in an anchor
+            'h3', // Fallback
+            'span'
+        ];
+        for (const sel of selectors) {
+            const el = jobCard.querySelector(sel);
+            if (el && el.textContent.trim().length > 0) {
+                return el.textContent.trim();
+            }
+        }
+        
+        // Fallback: try textContent of the card itself
+        return jobCard.textContent.trim().split('\n')[0];
+    }
+
     async function waitForDescriptionToLoad(expectedTitle) {
         let attempts = 0;
-        while (attempts < 15) { // Try for ~3 seconds
-            let descTitleElem = document.querySelector('.jobs-unified-top-card__job-title, .topcard__title');
+        while (attempts < 17) { // Try for ~8 seconds
+            let descTitleElem = document.querySelector('.jobs-unified-top-card__job-title, .topcard__title, .job-details-jobs-unified-top-card__job-title');
             if (descTitleElem && descTitleElem.textContent.trim() === expectedTitle) {
                 return true; // It has loaded!
             }
-            await new Promise(resolve => setTimeout(resolve, 200)); // Wait 200ms before trying again
+            await new Promise(resolve => setTimeout(resolve, 250));
             attempts++;
         }
         return false; // Timed out
@@ -573,25 +604,23 @@
         const jobCards = findJobCards();   
         stats = { total: jobCards.length, matching: 0, filtered: 0 };
         extractionResults = [];
-        // Load previously extracted jobs from storage
         chrome.storage.local.get(['extractedJobs'], async (result) => {
+            let lastTitle = '';
             for (let i = 0; i < jobCards.length; i++) {
-                console.log(jobCards.length);
+                const cardTitle = getTitleFromCard(jobCards[i]);
+                console.log(cardTitle)
+                jobCards[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                jobCards[i].click();
+                // Wait for the details panel to update to this job
+                await waitForDescriptionToLoad(cardTitle);
+                // Now get the details from the details panel
                 let jobTitleElem = document.querySelector('.jobs-unified-top-card__job-title, .topcard__title, .job-details-jobs-unified-top-card__job-title');
                 let companyElem = document.querySelector('.jobs-unified-top-card__company-name, .topcard__org-name-link, .job-details-jobs-unified-top-card__company-name');
-                let jobTitle = jobTitleElem ? jobTitleElem.textContent.trim() : '';
+                let jobTitle = jobTitleElem ? jobTitleElem.textContent.trim() : cardTitle;
                 let company = companyElem ? companyElem.textContent.trim() : '';
-                jobCards[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // const cardTitle = getTitleFromCard(jobCards[i]); 
-                jobCards[i].click();
-                await waitForDescriptionToLoad(jobTitle);
-                // await new Promise(resolve => setTimeout(resolve, 1400));
-                // const description = getJobDescription(jobCards[i]);
-                let descElem = document.querySelector('.jobs-description-content__text, .jobs-description__container, .description__text, .jobs-description-content');
+                let descElem = document.querySelector('.jobs-description-content__text, .jobs-description__container, .description__text, .jobs-description-content, .jobs-description__content');
                 let description = descElem ? descElem.textContent.trim() : '[No description found]';
-                // const expLevel = extractExperienceLevel(jobCards[i], description);
                 const expLevel = findExperienceOnPage();
-                
                 let expText = expLevel === -1 ? 'No specific experience mentioned' : 'Experience Level: ' + expLevel;
                 let jobData = {
                     title: jobTitle,
@@ -602,17 +631,14 @@
                 };
                 extractionResults.push(jobData);
                 jobCards[i]._jeData = jobData;
-                // updateExtractionResultsDisplay();
-                // console.log(`Extracted:`, jobData);
+                updateStats();
+                console.log(extractionResults);
                 updateExtractionResultsDisplay();
+
             }
-            // applyfilter();
-            
-            // updateStats();
-            // if (filterEnabled){
-            //     applyFiltering();
-            // }
+            // updateExtractionResultsDisplay();
             alert('Extraction complete! Check the popup for job experience results.');
+            applyFiltering(); // <-- Add this if not already present
         });
     } // extractAllJobDescriptions() ends here
 
